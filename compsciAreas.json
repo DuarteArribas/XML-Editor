@@ -2,39 +2,108 @@
   "fieldName": "Computer Science",
   "subfield": [
     {
-      "fieldName": "Arroz",
+      "fieldName": "Algorithms and Data Structures",
       "subfield": [
         {
-          "fieldName": "enfim",
+          "fieldName": "Algorithms"
+        },
+        {
+          "fieldName": "Data Structures",
           "subfield": [
             {
-              "fieldName": "lollll"
+              "fieldName": "Linear Data Structures",
+              "subfield": [
+                {
+                  "fieldName": "Arrays"
+                },
+                {
+                  "fieldName": "Linked Lists"
+                },
+                {
+                  "fieldName": "Stack and Queues"
+                }
+              ]
             },
             {
-              "fieldName": "lmaooooxDD"
+              "fieldName": "Non-Linear Data Structures",
+              "subfield": [
+                {
+                  "fieldName": "Graphs"
+                },
+                {
+                  "fieldName": "Hash Tables"
+                },
+                {
+                  "fieldName": "Trees"
+                }
+              ]
             }
           ]
-        } 
+        }
       ]
     },
     {
-      "fieldName": "Massa",
+      "fieldName": "Artificial Intelligence",
       "subfield": [
         {
-          "fieldName": "enfim2",
-          "subfield": [
-            {
-              "fieldName": "lollll3"
-            },
-            {
-              "fieldName": "lmaooooxDD4"
-            }
-          ]
-        } 
+          "fieldName": "Computer Vision"
+        },
+        {
+          "fieldName": "Machine Learning"
+        },
+        {
+          "fieldName": "Natural Language Processing"
+        },
+        {
+          "fieldName": "Robotics"
+        }
       ]
     },
     {
-      "fieldName": "Feijao"
+      "fieldName": "Computer Architecture"
+    },
+    {
+      "fieldName": "Computer Interaction"
+    },
+    {
+      "fieldName": "Computer Networks"
+    },
+    {
+      "fieldName": "Cybersecurity",
+      "subfield": [
+        {
+          "fieldName": "Cryptography"
+        },
+        {
+          "fieldName": "Network Security"
+        },
+        {
+          "fieldName": "OS Security"
+        },
+        {
+          "fieldName": "Programming Vulnerabilities"
+        },
+        {
+          "fieldName": "Web Security"
+        }
+        
+        
+      ]
+    },
+    {
+      "fieldName": "Database Systems"
+    },
+    {
+      "fieldName": "Data Science"
+    },
+    {
+      "fieldName": "Programming Languages and Compilers"
+    },
+    {
+      "fieldName": "Software Engineering"
+    },
+    {
+      "fieldName": "Theoretical Computer Science"
     }
   ]
 }

@@ -24,4 +24,4 @@ def writeMindMap(data,g):
 
 graph = pydot.Dot(graph_type='graph')
 writeMindMap(getJsonString("compsciAreas.json"),graph)
-graph.write_png('tree.png')
+graph.write_png('compsciMindMap.png')
