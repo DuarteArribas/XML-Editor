@@ -12,12 +12,19 @@ def buildWindow(xmlTree,xmlRoot):
     [sg.Button('Add'),sg.Button('Remove')],
     [sg.Button('Next'),sg.Button('Previous'),sg.Button("Exit")]
   ]
-  window = sg.Window('XML GUI',layout,element_justification = "c")
+  window   = sg.Window('XML GUI',layout,element_justification = "c")
   xmlTable = window["xmlTable"]
   while True:
     event,values = window.read()
     if event == sg.WIN_CLOSED or event == 'Exit':
       break
+    if event == "Add" and values['xmlTable']:
+      newElement = addHandlerWindow()
+      if newElement:
+        value = values['xmlTable']
+        insertElement(xmlTree,XML_FILE,xmlRoot,"".join(xmlTable.Values[value[0]]),newElement)
+        xmlTree = ET.parse(XML_FILE)
+        xmlRoot = xmlTree.getroot()
     if event == "Next" and values['xmlTable']:
       value = values['xmlTable']
       elements = getElements(xmlRoot,"".join(xmlTable.Values[value[0]]))
@@ -35,14 +42,31 @@ def errorHandlerWindow(message):
   window = sg.Window("Oopsie!",layout)
   while True:
     event,values = window.read()
-    if event == 'Ok' or event == sg.WIN_CLOSED:
+    if event == "Ok" or event == sg.WIN_CLOSED:
       window.close()
       break
+
+def addHandlerWindow():
+  layout = [
+    [sg.Text("New Element Name:",font=16),sg.InputText(key = "addInput",font=16)],
+    [sg.Button("Ok"),sg.Button("Cancel")]
+  ]
+  window  = sg.Window("Add New element!",layout)
+  while True:
+    event,values = window.read()
+    if event == "Cancel" or event == sg.WIN_CLOSED:
+      window.close()
+      return None
+    if event == "Ok":
+      if not values['addInput'].strip():
+        errorHandlerWindow("Please input a valid name. Empty names are not allowed!")
+      else:
+        window.close()
+        return values['addInput']
 
 def main():
   xmlTree = ET.parse(XML_FILE)
   xmlRoot = xmlTree.getroot()
-  #print(getElements(xmlRoot,"Computer_Science"))
   buildWindow(xmlTree,xmlRoot)
 
 if __name__ == "__main__":
