@@ -2,6 +2,8 @@ import xml.etree.ElementTree as ET
 import xml.etree
 
 def getElements(root,name):
+  if root.tag == name:
+    return [elements.tag for elements in root]
   for element in root:
     if element.tag == name:
       return [subelements.tag for subelements in element]
