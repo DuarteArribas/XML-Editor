@@ -2,7 +2,7 @@
   "fieldName": "Computer Science",
   "subfield": [
     {
-      "fieldName": "Algorithms and Data Structures",
+      "fieldName": "Algorithms and Da Structures",
       "subfield": [
         {
           "fieldName": "Algorithms"
@@ -66,7 +66,24 @@
       "fieldName": "Computer Interaction"
     },
     {
-      "fieldName": "Computer Networks"
+      "fieldName": "Computer Networks",
+      "subfield": [
+        {
+          "fieldName": "Network Architecture (Layer Models and Protocols)"
+        },
+        {
+          "fieldName": "Wireless Networks"
+        },
+        {
+          "fieldName": "Mobile Networks"
+        },
+        {
+          "fieldName": "Cloud Computing"
+        },
+        {
+          "fieldName": "Internet of Things (IoT)"
+        }
+      ]
     },
     {
       "fieldName": "Cybersecurity",
@@ -86,8 +103,6 @@
         {
           "fieldName": "Web Security"
         }
-        
-        
       ]
     },
     {
