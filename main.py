@@ -16,23 +16,25 @@ def buildWindow(xmlTree,xmlRoot):
   xmlTable = window["xmlTable"]
   while True:
     event,values = window.read()
+    value = values['xmlTable'] if values['xmlTable'] else ""
     if event == sg.WIN_CLOSED or event == 'Exit':
       break
     if event == "Add" and values['xmlTable']:
       newElement = addHandlerWindow()
       if newElement:
-        value = values['xmlTable']
         insertElement(xmlTree,XML_FILE,xmlRoot,"".join(xmlTable.Values[value[0]]),newElement)
         xmlTree = ET.parse(XML_FILE)
         xmlRoot = xmlTree.getroot()
+    if event == "Remove" and values['xmlTable']:
+      if confirmWindow():
+        removeElement(xmlTree,XML_FILE,xmlRoot,"".join(xmlTable.Values[value[0]]))
     if event == "Next" and values['xmlTable']:
-      value = values['xmlTable']
       elements = getElements(xmlRoot,"".join(xmlTable.Values[value[0]]))
       if not elements:
         errorHandlerWindow(f"There are no more elements after {''.join(xmlTable.Values[value[0]])}!")
       else:
         xmlTable.update(elements)
-  window.close() 
+  window.close()
 
 def errorHandlerWindow(message):
   layout = [
@@ -45,6 +47,22 @@ def errorHandlerWindow(message):
     if event == "Ok" or event == sg.WIN_CLOSED:
       window.close()
       break
+
+def confirmWindow():
+  layout = [
+    [sg.Text("Do you want to remove?")],
+    [sg.Button("Yes")],
+    [sg.Button("No")]
+  ]
+  window = sg.Window("Confirmation",layout)
+  while True:
+    event,values = window.read()
+    if event == "Yes":
+      window.close()
+      return True
+    if event == "No" or event == sg.WIN_CLOSED:
+      window.close()
+      return False
 
 def addHandlerWindow():
   layout = [
@@ -63,11 +81,25 @@ def addHandlerWindow():
       else:
         window.close()
         return values['addInput']
+        
+def getFilenameWindow():
+  sg.theme('DarkAmber')
+  layout = [
+    [[sg.T("")], [sg.Text("Choose a file: "), sg.Input(key = "addInput",font=16), sg.FileBrowse()]],
+    [[sg.Button("Exit")]]
+  ]
+  window   = sg.Window('Choose an XML file',layout,element_justification = "c")
+  while True:
+    event,values = window.read()
+    if event == sg.WIN_CLOSED or event == 'Exit':
+      break
+  window.close()
 
 def main():
-  xmlTree = ET.parse(XML_FILE)
-  xmlRoot = xmlTree.getroot()
-  buildWindow(xmlTree,xmlRoot)
+  file = getFilenameWindow()
+  #xmlTree = ET.parse(XML_FILE)
+  #xmlRoot = xmlTree.getroot()
+  #buildWindow(xmlTree,xmlRoot)
 
 if __name__ == "__main__":
   main()
