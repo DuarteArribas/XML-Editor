@@ -1,4 +1,5 @@
 import re
+import PySimpleGUI as sg
 from errorWindow import *
 
 def rootPickerWindow():
