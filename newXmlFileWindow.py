@@ -7,14 +7,15 @@ def newXMLFileWindow():
   layout = [
     [[sg.Text("File name: "),sg.Input(key = "newFileName",font = 16,default_text = "myFile.xml")]],
     [[sg.Text("Choose a location: "),sg.Input(key = "xmlLocation",font=16),sg.FolderBrowse()]],
-    [[sg.Button("Go"),sg.Button("Exit")]]
+    [[sg.Button("Create New")]],
+    [[sg.Button("Go Back"),sg.Button("Exit")]]
   ]
   window = sg.Window("New File",layout,element_justification = "c")
   while True:
     event,values = window.read()
     if event == sg.WIN_CLOSED or event == "Exit":
       break
-    if event == "Go":
+    if event == "Create New":
       if not values["newFileName"] or not values["xmlLocation"]:
         continue
       xmlName = values["newFileName"]
@@ -24,9 +25,11 @@ def newXMLFileWindow():
       createNewXMLFile(newFilePath,newRoot)
       window.close()
       return newFilePath
+    if event == "Go Back":
+      window.close()
+      return None
     window.close()
-  
-
+    
 def createNewXMLFile(filename,root):
   with open(filename,"w") as newXmlFile:
     newXmlFile.write(f"<{root}>\n</{root}>")

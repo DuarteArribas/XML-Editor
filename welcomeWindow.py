@@ -15,8 +15,13 @@ def welcomeWindow():
     if event == sg.WIN_CLOSED or event == "Exit":
       break
     if event == "New File":
-      window.close()
-      return newXMLFileWindow()
+      file = newXMLFileWindow()
+      if file:
+        window.close()
+        return file
     if event == "Open File":
-      window.close()
-      return filePickerWindow()
+      file = filePickerWindow()
+      if file:
+        window.close()
+        return file
+  window.close()

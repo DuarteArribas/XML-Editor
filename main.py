@@ -1,7 +1,5 @@
 import xml.etree.ElementTree as ET
 from xmlParser import *
-from filePickerWindow import *
-from newXmlFileWindow import *
 from welcomeWindow    import *
 XML_FOLDER = "compsciXml"
 XML_FILE   = f"{XML_FOLDER}/compsci.xml"

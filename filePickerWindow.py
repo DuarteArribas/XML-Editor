@@ -1,13 +1,14 @@
 import PySimpleGUI as sg
 from rootPickerWindow import *
-from newXmlFileWindow import *
 from errorWindow      import *
 from xmlParser        import *
+from newXmlFileWindow import *
 
 def filePickerWindow():
   layout = [
     [[sg.Text("Choose an XML file: "),sg.Input(key = "xmlFile",font=16),sg.FileBrowse()]],
-    [[sg.Button("Open"),sg.Button("Exit")]]
+    [[sg.Button("Open")]],
+    [[sg.Button("Go Back"),sg.Button("Exit")]]
   ]
   window = sg.Window("XML file chooser",layout,element_justification = "c")
   while True:
@@ -22,6 +23,9 @@ def filePickerWindow():
         return xmlFileInput
       else:
         errorWindow("XML validation error",f"{xmlFileInput.split('/')[-1]} is not a valid xml file!")
+    if event == "Go Back":
+      window.close()
+      return None
   window.close()
 
 def _checkXmlFile(file):
