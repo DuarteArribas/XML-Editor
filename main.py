@@ -1,6 +1,6 @@
-import PySimpleGUI as sg
 import xml.etree.ElementTree as ET
 from xmlParser import *
+from gui import *
 
 XML_FOLDER = "compsciXml"
 XML_FILE   = f"{XML_FOLDER}/compsci.xml"
@@ -36,17 +36,7 @@ def buildWindow(xmlTree,xmlRoot):
         xmlTable.update(elements)
   window.close()
 
-def errorHandlerWindow(message):
-  layout = [
-    [sg.Text(message,size=(len(message),1),font=16)],
-    [sg.Button("Ok")]
-  ]
-  window = sg.Window("Oopsie!",layout)
-  while True:
-    event,values = window.read()
-    if event == "Ok" or event == sg.WIN_CLOSED:
-      window.close()
-      break
+
 
 def confirmWindow():
   layout = [
@@ -82,20 +72,14 @@ def addHandlerWindow():
         window.close()
         return values['addInput']
         
-def getFilenameWindow():
-  sg.theme('DarkAmber')
-  layout = [
-    [[sg.T("")], [sg.Text("Choose a file: "), sg.Input(key = "addInput",font=16), sg.FileBrowse()]],
-    [[sg.Button("Exit")]]
-  ]
-  window   = sg.Window('Choose an XML file',layout,element_justification = "c")
-  while True:
-    event,values = window.read()
-    if event == sg.WIN_CLOSED or event == 'Exit':
-      break
-  window.close()
+
+
+
+    
+
 
 def main():
+  sg.theme('DarkAmber')
   file = getFilenameWindow()
   #xmlTree = ET.parse(XML_FILE)
   #xmlRoot = xmlTree.getroot()
