@@ -1,6 +1,8 @@
 import PySimpleGUI as sg
-from errorWindow import * 
-from xmlParser import *
+from rootPickerWindow import *
+from newXmlFileWindow import *
+from errorWindow      import *
+from xmlParser        import *
 
 def filePickerWindow():
   layout = [

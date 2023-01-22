@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 from xmlParser import *
 from gui import *
+from filePickerWindow import *
 
 XML_FOLDER = "compsciXml"
 XML_FILE   = f"{XML_FOLDER}/compsci.xml"
@@ -80,7 +81,7 @@ def addHandlerWindow():
 
 def main():
   sg.theme('DarkAmber')
-  file = getFilenameWindow()
+  file = filePickerWindow()
   #xmlTree = ET.parse(XML_FILE)
   #xmlRoot = xmlTree.getroot()
   #buildWindow(xmlTree,xmlRoot)
