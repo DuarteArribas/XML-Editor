@@ -21,7 +21,7 @@ def filePickerWindow():
       if _checkXmlFile(xmlFileInput):
         return xmlFileInput
       else:
-        errorWindow("XML validation error",f"{xmlFileInput} is not a valid xml file!")
+        errorWindow("XML validation error",f"{xmlFileInput.split('/')[-1]} is not a valid xml file!")
   window.close()
 
 def _checkXmlFile(file):
