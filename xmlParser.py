@@ -19,11 +19,11 @@ def getElements(root,name):
     if el:
       return el
 
-def insertElement(tree,fileName,root,name,newElementName):
+def insertElement(tree,fileName,root,name,newElementName,newElementDesc):
   for element in root:
     if element.tag == name:
       tmpEl = xml.etree.ElementTree.Element(newElementName)
-      tmpEl.text = " "
+      tmpEl.text = newElementDesc
       element.insert(1,tmpEl)
       tree.write(fileName)
       return True

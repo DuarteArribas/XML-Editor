@@ -1,13 +1,15 @@
 import PySimpleGUI as sg
+from addElementWindow import *
+from errorWindow      import *
+from xmlParser        import *
 
-def treeWindow(xmlTree,xmlRoot):
-  sg.theme('DarkAmber')
+def treeWindow(xmlTree,xmlRoot,xmlFile):
   layout = [
-    [sg.Table(values = [[xmlRoot.tag]],headings = ["Name"],max_col_width = 50, auto_size_columns = True,justification = 'center',key = "xmlTable",enable_events = True)],
+    [sg.Table(values = [[xmlRoot.tag]],headings = ["Name"],max_col_width = 50,auto_size_columns = True,justification = 'center',key = "xmlTable",enable_events = True)],
     [sg.Button('Add'),sg.Button('Remove')],
     [sg.Button('Next'),sg.Button('Previous'),sg.Button("Exit")]
   ]
-  window   = sg.Window('XML GUI',layout,element_justification = "c")
+  window   = sg.Window('XML Tree',layout,element_justification = "c")
   xmlTable = window["xmlTable"]
   while True:
     event,values = window.read()
@@ -15,18 +17,18 @@ def treeWindow(xmlTree,xmlRoot):
     if event == sg.WIN_CLOSED or event == 'Exit':
       break
     if event == "Add" and values['xmlTable']:
-      newElement = addHandlerWindow()
+      newElement,newElementDesc = addHandlerWindow()
       if newElement:
-        insertElement(xmlTree,XML_FILE,xmlRoot,"".join(xmlTable.Values[value[0]]),newElement)
-        xmlTree = ET.parse(XML_FILE)
+        insertElement(xmlTree,xmlFile,xmlRoot,"".join(xmlTable.Values[value[0]]),newElement,newElementDesc)
+        xmlTree = ET.parse(xmlFile)
         xmlRoot = xmlTree.getroot()
-    if event == "Remove" and values['xmlTable']:
-      if confirmWindow():
-        removeElement(xmlTree,XML_FILE,xmlRoot,"".join(xmlTable.Values[value[0]]))
+    #if event == "Remove" and values['xmlTable']:
+    #  if confirmWindow():
+    #    removeElement(xmlTree,XML_FILE,xmlRoot,"".join(xmlTable.Values[value[0]]))
     if event == "Next" and values['xmlTable']:
       elements = getElements(xmlRoot,"".join(xmlTable.Values[value[0]]))
       if not elements:
-        errorHandlerWindow(f"There are no more elements after {''.join(xmlTable.Values[value[0]])}!")
+        errorWindow(f"There are no more elements after {''.join(xmlTable.Values[value[0]])}!")
       else:
         xmlTable.update(elements)
   window.close()
