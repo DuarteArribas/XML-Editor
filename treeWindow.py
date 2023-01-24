@@ -5,7 +5,7 @@ from xmlParser        import *
 
 def treeWindow(xmlTree,xmlRoot,xmlFile):
   layout = [
-    [sg.Table(values = [[xmlRoot.tag]],headings = ["Name"],max_col_width = 50,auto_size_columns = True,justification = 'center',key = "xmlTable",enable_events = True)],
+    [sg.Table(values = [[xmlRoot.tag.replace("__"," ")]],headings = ["Name"],max_col_width = 150,auto_size_columns = True,justification = 'center',key = "xmlTable",enable_events = True)],
     [sg.Button('Add'),sg.Button('Remove')],
     [sg.Button('Next'),sg.Button('Previous'),sg.Button("Exit")]
   ]
@@ -30,5 +30,5 @@ def treeWindow(xmlTree,xmlRoot,xmlFile):
       if not elements:
         errorWindow("Element Error",f"There are no more elements after {''.join(xmlTable.Values[value[0]])}!")
       else:
-        xmlTable.update(elements)
+        xmlTable.update([elementWithoutSpaces.replace("__"," ") for elementWithoutSpaces in elements])
   window.close()

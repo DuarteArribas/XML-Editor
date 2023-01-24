@@ -22,4 +22,4 @@ def addHandlerWindow():
           errorWindow("Tag Error",f"{values['addInput']} contains invalid characters for xml tags! Check naming rules at https://www.w3schools.com/xml/xml_elements.asp#midcontentadcontainer")
           continue
         window.close()
-        return values["addInput"],values["desc"]
+        return values["addInput"].replace(" ","__"),values["desc"]

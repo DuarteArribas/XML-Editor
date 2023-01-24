@@ -22,7 +22,8 @@ def getElements(root,name):
 def insertElement(tree,filename,root,name,newElementName,newElementDesc):
   if root.tag == name:
     tmpEl = xml.etree.ElementTree.Element(newElementName)
-    tmpEl.attrib = {"Description":newElementDesc}
+    if newElementDesc:
+      tmpEl.attrib = {"Description":newElementDesc}
     tmpEl.text = " "
     root.insert(1,tmpEl)
     tree.write(filename)
@@ -30,13 +31,14 @@ def insertElement(tree,filename,root,name,newElementName,newElementDesc):
   for element in root:
     if element.tag == name:
       tmpEl = xml.etree.ElementTree.Element(newElementName)
-      tmpEl.attrib = {"Description":newElementDesc}
+      if newElementDesc:
+        tmpEl.attrib = {"Description":newElementDesc}
       tmpEl.text = " "
       element.insert(1,tmpEl)
       tree.write(filename)
       return True
   for element in root:
-    el = insertElement(tree,filename,element,name,newElementName)
+    el = insertElement(tree,filename,element,name,newElementName,newElementDesc)
     if el:
       return el
 
