@@ -11,7 +11,7 @@ def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
   layout = [
     [sg.Table(values = [[xmlRoot.tag.replace("__"," ")]],headings = ["Name"],max_col_width = 150,auto_size_columns = True,justification = 'center',key = "xmlTable",enable_events = True)],
     [sg.Button('Add'),sg.Button('Remove')],
-    [sg.Button('Next'),sg.Button('Previous'),sg.Button("Exit")]
+    [sg.Button('Next'),sg.Button('Previous'),sg.Button('Top'),sg.Button("Exit")]
   ]
   window   = sg.Window('XML Tree',layout,element_justification = "c")
   xmlTable = window["xmlTable"]
@@ -49,6 +49,8 @@ def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
         break
       else:
         xmlTable.update(_getElementsWithSpaces(elements))
+    if event == "Top":
+      xmlTable.update([xmlRoot.tag])
   window.close()
   
 def _getElementsWithSpaces(elementsWithoutSpaces):
