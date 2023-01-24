@@ -1,4 +1,6 @@
-def buildWindow(xmlTree,xmlRoot):
+import PySimpleGUI as sg
+
+def treeWindow(xmlTree,xmlRoot):
   sg.theme('DarkAmber')
   layout = [
     [sg.Table(values = [[xmlRoot.tag]],headings = ["Name"],max_col_width = 50, auto_size_columns = True,justification = 'center',key = "xmlTable",enable_events = True)],
