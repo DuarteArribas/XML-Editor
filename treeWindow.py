@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+import textwrap
 from addElementWindow import *
 from errorWindow      import *
 from xmlParser        import *
@@ -30,5 +31,8 @@ def treeWindow(xmlTree,xmlRoot,xmlFile):
       if not elements:
         errorWindow("Element Error",f"There are no more elements after {''.join(xmlTable.Values[value[0]])}!")
       else:
-        xmlTable.update([elementWithoutSpaces.replace("__"," ") for elementWithoutSpaces in elements])
+        elementsWithSpaces = [
+          textwrap.wrap(elementWithoutSpaces.replace("__"," "),len(elementWithoutSpaces.replace("__"," "))) for elementWithoutSpaces in elements
+        ]
+        xmlTable.update(elementsWithSpaces)
   window.close()
