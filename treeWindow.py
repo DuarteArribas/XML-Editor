@@ -20,6 +20,9 @@ def treeWindow(xmlTree,xmlRoot,xmlFile):
     if event == "Add" and values['xmlTable']:
       newElement,newElementDesc = addHandlerWindow()
       if newElement:
+        if newElement in getAllElements(xmlRoot):
+          errorWindow("Element Error",f"{newElement.replace('__',' ')} already exists!")
+          continue
         insertElement(xmlTree,xmlFile,xmlRoot,"".join(xmlTable.Values[value[0]]),newElement,newElementDesc)
         xmlTree = ET.parse(xmlFile)
         xmlRoot = xmlTree.getroot()

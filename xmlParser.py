@@ -19,6 +19,9 @@ def getElements(root,name):
     if el:
       return el
 
+def getAllElements(root):
+  return [elem.tag for elem in root.iter()]
+
 def insertElement(tree,filename,root,name,newElementName,newElementDesc):
   if root.tag == name:
     tmpEl = xml.etree.ElementTree.Element(newElementName)
