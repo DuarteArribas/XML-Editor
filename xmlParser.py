@@ -22,6 +22,17 @@ def getElements(root,name):
 def getAllElements(root):
   return [elem.tag for elem in root.iter()]
 
+def getParentElement(root,name,parentElement):
+  if root.tag == name:
+    return None
+  for element in root:
+    if element.tag == name:
+      return parentElement
+  for element in root:
+    el = getParentElements(element,name,element.tag)
+    if el:
+      return el
+      
 def getParentElements(root,name,parentElements):
   if root.tag == name:
     return None
@@ -52,7 +63,7 @@ def insertElement(tree,filename,root,name,newElementName,newElementAttributes):
       tree.write(filename)
       return True
   for element in root:
-    el = insertElement(tree,filename,element,name,newElementName,newElementDesc)
+    el = insertElement(tree,filename,element,name,newElementName,newElementAttributes)
     if el:
       return el
 
