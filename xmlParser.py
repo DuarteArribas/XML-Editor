@@ -19,27 +19,35 @@ def getElements(root,name):
     if el:
       return el
 
-def insertElement(tree,fileName,root,name,newElementName,newElementDesc):
+def insertElement(tree,filename,root,name,newElementName,newElementDesc):
+  if root.tag == name:
+    tmpEl = xml.etree.ElementTree.Element(newElementName)
+    tmpEl.attrib = {"Description":newElementDesc}
+    tmpEl.text = " "
+    root.insert(1,tmpEl)
+    tree.write(filename)
+    return True
   for element in root:
     if element.tag == name:
       tmpEl = xml.etree.ElementTree.Element(newElementName)
-      tmpEl.text = newElementDesc
+      tmpEl.attrib = {"Description":newElementDesc}
+      tmpEl.text = " "
       element.insert(1,tmpEl)
-      tree.write(fileName)
+      tree.write(filename)
       return True
   for element in root:
-    el = insertElement(tree,fileName,element,name,newElementName)
+    el = insertElement(tree,filename,element,name,newElementName)
     if el:
       return el
 
-def removeElement(tree,fileName,root,name):
+def removeElement(tree,filename,root,name):
   for element in root:
     if element.tag == name:
       element.clear()
       root.remove(element)
-      tree.write(fileName)
+      tree.write(filename)
       return True
   for element in root:
-    el = removeElement(tree,fileName,element,name)
+    el = removeElement(tree,filename,element,name)
     if el:
       return el

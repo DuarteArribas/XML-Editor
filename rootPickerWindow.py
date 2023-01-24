@@ -21,7 +21,7 @@ def rootPickerWindow():
         window.close()
         return values["rootEl"]
       else:
-        errorWindow("Tag error",f"{root} contains invalid characters for xml tags! Check naming rules at https://www.w3schools.com/xml/xml_elements.asp#midcontentadcontainer")
+        errorWindow("Tag Error",f"{root} contains invalid characters for xml tags! Check naming rules at https://www.w3schools.com/xml/xml_elements.asp#midcontentadcontainer")
 
 def _validateTag(tag):
   return bool(re.match(r"^[a-zA-Z_][a-zA-Z\d_.-]*$",tag))

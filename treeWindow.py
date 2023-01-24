@@ -28,7 +28,7 @@ def treeWindow(xmlTree,xmlRoot,xmlFile):
     if event == "Next" and values['xmlTable']:
       elements = getElements(xmlRoot,"".join(xmlTable.Values[value[0]]))
       if not elements:
-        errorWindow(f"There are no more elements after {''.join(xmlTable.Values[value[0]])}!")
+        errorWindow("Element Error",f"There are no more elements after {''.join(xmlTable.Values[value[0]])}!")
       else:
         xmlTable.update(elements)
   window.close()

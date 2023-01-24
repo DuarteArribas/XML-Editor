@@ -15,7 +15,7 @@ def addHandlerWindow():
       return None,None
     if event == "Ok":
       if not values["addInput"].strip():
-        errorWindow("Please input a valid name. Empty names are not allowed!")
+        errorWindow("Input Error","Please input a valid name. Empty names are not allowed!")
       else:
         window.close()
         return values["addInput"],values["desc"]
