@@ -4,10 +4,12 @@ from xmlParser     import *
 
 def main():
   sg.theme('DarkAmber')
-  xmlFile = welcomeWindow()
-  xmlTree = ET.parse(xmlFile)
-  xmlRoot = xmlTree.getroot()
-  treeWindow(xmlTree,xmlRoot,xmlFile)
+  while True:
+    xmlFile = welcomeWindow()
+    if xmlFile:
+      xmlTree = ET.parse(xmlFile)
+      xmlRoot = xmlTree.getroot()
+      treeWindow(xmlTree,xmlRoot,xmlRoot,xmlFile)
 
 if __name__ == "__main__":
   main()

@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+import sys
 import os
 from rootPickerWindow import *
 from errorWindow      import *
@@ -14,7 +15,7 @@ def newXMLFileWindow():
   while True:
     event,values = window.read()
     if event == sg.WIN_CLOSED or event == "Exit":
-      break
+      sys.exit(0)
     if event == "Create New":
       if not values["newFileName"] or not values["xmlLocation"]:
         continue

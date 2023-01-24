@@ -46,6 +46,10 @@ def insertElement(tree,filename,root,name,newElementName,newElementDesc):
       return el
 
 def removeElement(tree,filename,root,name):
+  if root.tag == name:
+    with open(filename,"w") as f:
+      f.write("")
+    return True
   for element in root:
     if element.tag == name:
       element.clear()

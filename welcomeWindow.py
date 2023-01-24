@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-import os
+import sys
 from newXmlFileWindow import *
 from filePickerWindow import *
 
@@ -13,15 +13,19 @@ def welcomeWindow():
   while True:
     event,values = window.read()
     if event == sg.WIN_CLOSED or event == "Exit":
-      break
+      sys.exit(0)
     if event == "New File":
+      window.close()
       file = newXMLFileWindow()
       if file:
-        window.close()
         return file
+      else:
+        break  
     if event == "Open File":
+      window.close()
       file = filePickerWindow()
       if file:
-        window.close()
         return file
+      else:
+        break
   window.close()
