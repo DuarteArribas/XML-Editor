@@ -6,9 +6,11 @@ def addHandlerWindow():
   layout = [
     [sg.Text("New Element Name:",font=16),sg.InputText(key = "addInput",font=16)],
     [sg.Text("Attribute:",font=16),sg.InputText(key = "attrib",font=16),sg.Text("Value:",font=16),sg.InputText(key = "value",font=16),sg.Button("Add")],
+    [sg.Text("Attributes to add:",font=16),sg.Listbox(values = [],key = "attributeList",font = 11),sg.Button("Remove")],
     [sg.Button("Ok"),sg.Button("Cancel")]
   ]
   window  = sg.Window("Add New element",layout)
+  attributeList = window["attributeList"]
   attributes = {}
   while True:
     event,values = window.read()
@@ -26,3 +28,15 @@ def addHandlerWindow():
         return values["addInput"].replace(" ","__"),attributes
     if event == "Add" and values["attrib"] and values["value"]:
       attributes[values["attrib"]] = values["value"]
+      attributeList.update(_getListOfAttributes(attributes))
+    if event == "Remove" and values["attributeList"]:
+      key = "".join(values["attributeList"]).split(": ")[1].split("=")[0]
+      del attributes[key]
+      attributeList.update(_getListOfAttributes(attributes))
+
+
+def _getListOfAttributes(attributesDictionary):
+  attributesList = []
+  for attribute,value in attributesDictionary.items():
+    attributesList.append(f"Attribute {len(attributesList) + 1}: {attribute}=\"{value}\"")
+  return attributesList
