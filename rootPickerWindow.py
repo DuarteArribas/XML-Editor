@@ -1,7 +1,7 @@
-import re
 import sys
 import PySimpleGUI as sg
-from errorWindow import *
+from errorWindow   import *
+from tagValidation import *
 
 def rootPickerWindow():
   layout = [
@@ -17,11 +17,8 @@ def rootPickerWindow():
       root = values["rootEl"]
       if not root:
         continue
-      if _validateTag(root):
+      if validateTag(root):
         window.close()
         return values["rootEl"]
       else:
         errorWindow("Tag Error",f"{root} contains invalid characters for xml tags! Check naming rules at https://www.w3schools.com/xml/xml_elements.asp#midcontentadcontainer")
-
-def _validateTag(tag):
-  return bool(re.match(r"^[a-zA-Z_][a-zA-Z\d_.-]*$",tag))
