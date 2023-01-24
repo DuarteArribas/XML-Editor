@@ -16,7 +16,6 @@ def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
   window   = sg.Window('XML Tree',layout,element_justification = "c")
   xmlTable = window["xmlTable"]
   while True:
-    #print(xmlParent)
     event,values = window.read()
     value = values['xmlTable'] if values['xmlTable'] else ""
     if event == sg.WIN_CLOSED or event == 'Exit':
@@ -42,9 +41,17 @@ def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
       if not elements:
         errorWindow("Element Error",f"There are no more elements after {''.join(xmlTable.Values[value[0]])}!")
       else:
-        elementsWithSpaces = [
-          textwrap.wrap(elementWithoutSpaces.replace("__"," "),len(elementWithoutSpaces.replace("__"," "))) for elementWithoutSpaces in elements
-        ]
         xmlParent = ''.join(xmlTable.Values[value[0]])
-        xmlTable.update(elementsWithSpaces)
+        xmlTable.update(_getElementsWithSpaces(elements))
+    if event == "Previous" and values['xmlTable']:
+      elements = getParentElements(xmlRoot,"".join(xmlTable.Values[value[0]]),[xmlRoot.tag])
+      if not elements:
+        break
+      else:
+        xmlTable.update(_getElementsWithSpaces(elements))
   window.close()
+  
+def _getElementsWithSpaces(elementsWithoutSpaces):
+  return [
+    textwrap.wrap(elementWithoutSpaces.replace("__"," "),len(elementWithoutSpaces.replace("__"," "))) for elementWithoutSpaces in elementsWithoutSpaces
+  ]

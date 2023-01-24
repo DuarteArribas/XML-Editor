@@ -22,6 +22,17 @@ def getElements(root,name):
 def getAllElements(root):
   return [elem.tag for elem in root.iter()]
 
+def getParentElements(root,name,parentElements):
+  if root.tag == name:
+    return None
+  for element in root:
+    if element.tag == name:
+      return parentElements  
+  for element in root:
+    el = getParentElements(element,name,[e.tag for e in root])
+    if el:
+      return el
+
 def insertElement(tree,filename,root,name,newElementName,newElementDesc):
   if root.tag == name:
     tmpEl = xml.etree.ElementTree.Element(newElementName)
