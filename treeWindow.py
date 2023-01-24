@@ -21,12 +21,12 @@ def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
     if event == sg.WIN_CLOSED or event == 'Exit':
       sys.exit(0)
     if event == "Add" and values['xmlTable']:
-      newElement,newElementDesc = addHandlerWindow()
+      newElement,newElementAttributes = addHandlerWindow()
       if newElement:
         if newElement in getAllElements(xmlRoot):
           errorWindow("Element Error",f"{newElement.replace('__',' ')} already exists!")
           continue
-        insertElement(xmlTree,xmlFile,xmlRoot,"".join(xmlTable.Values[value[0]]),newElement,newElementDesc)
+        insertElement(xmlTree,xmlFile,xmlRoot,"".join(xmlTable.Values[value[0]]),newElement,newElementAttributes)
         xmlTree = ET.parse(xmlFile)
         xmlRoot = xmlTree.getroot()
     if event == "Remove" and values['xmlTable']:

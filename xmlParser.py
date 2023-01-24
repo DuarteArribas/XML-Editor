@@ -33,11 +33,11 @@ def getParentElements(root,name,parentElements):
     if el:
       return el
 
-def insertElement(tree,filename,root,name,newElementName,newElementDesc):
+def insertElement(tree,filename,root,name,newElementName,newElementAttributes):
   if root.tag == name:
     tmpEl = xml.etree.ElementTree.Element(newElementName)
-    if newElementDesc:
-      tmpEl.attrib = {"Description":newElementDesc}
+    if newElementAttributes:
+      tmpEl.attrib = newElementAttributes
     tmpEl.text = " "
     root.insert(1,tmpEl)
     tree.write(filename)
@@ -45,8 +45,8 @@ def insertElement(tree,filename,root,name,newElementName,newElementDesc):
   for element in root:
     if element.tag == name:
       tmpEl = xml.etree.ElementTree.Element(newElementName)
-      if newElementDesc:
-        tmpEl.attrib = {"Description":newElementDesc}
+      if newElementAttributes:
+        tmpEl.attrib = newElementAttributes
       tmpEl.text = " "
       element.insert(1,tmpEl)
       tree.write(filename)
