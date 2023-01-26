@@ -81,5 +81,6 @@ def _generateFilePaths(initialFolder,xmlFilePaths,txtForEachAttribute):
     if not os.path.exists(newPath):
       os.makedirs(newPath)
     if txtForEachAttribute:
-      with open(newPath + f"/{path[1]}","w") as f:
-        f.write(path[2] + "\n")
+      for attr in list(path[1].keys()):
+        with open(newPath + f"/{attr}","w") as f:
+          f.write(path[1][attr] + "\n")
