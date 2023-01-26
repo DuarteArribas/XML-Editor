@@ -63,11 +63,11 @@ def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
       else:
         xmlTable.update(_getElementsWithSpaces(getElements(xmlRoot,parentElement)))
     if event == "Generate File Path":
-      initialFolder = pickFolderOfPathWindow()
+      initialFolder,txtForEachAttribute = pickFolderOfPathWindow()
       if not initialFolder:
         continue
       xmlFilePaths = getXMLFilePaths(xmlFile)
-      _generateFilePaths(initialFolder,xmlFilePaths)
+      _generateFilePaths(initialFolder,xmlFilePaths,txtForEachAttribute)
   window.close()
 
 def _getElementsWithSpaces(elementsWithoutSpaces):
@@ -75,8 +75,11 @@ def _getElementsWithSpaces(elementsWithoutSpaces):
     textwrap.wrap(elementWithoutSpaces.replace("__"," "),len(elementWithoutSpaces.replace("__"," "))) for elementWithoutSpaces in elementsWithoutSpaces
   ]
 
-def _generateFilePaths(initialFolder,xmlFilePaths):
+def _generateFilePaths(initialFolder,xmlFilePaths,txtForEachAttribute):
   for path in xmlFilePaths:
-    newPath = initialFolder + path
+    newPath = initialFolder + path[0]
     if not os.path.exists(newPath):
       os.makedirs(newPath)
+    if txtForEachAttribute:
+      with open(newPath + f"/{path[1]}","w") as f:
+        f.write(path[2] + "\n")

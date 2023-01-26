@@ -91,5 +91,5 @@ def getXMLFilePaths(file):
   tree = etree.ElementTree(root)
   filePaths = []
   for e in root.iter():
-    filePaths.append(tree.getpath(e))
+    filePaths.append([tree.getpath(e),list(e.attrib.keys())[0],e.attrib[list(e.attrib.keys())[0]]])
   return filePaths

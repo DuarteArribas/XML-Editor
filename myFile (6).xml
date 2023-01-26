@@ -1,11 +1,11 @@
-<Arroz>
-  <Massa>
-    <Feijao>
+<Arroz a="aa">
+  <Massa b="bb">
+    <Feijao c="cc">
     
     </Feijao>
   </Massa>
-  <Vinagre>
-    <Grao>
+  <Vinagre d="dd">
+    <Grao e="ee">
     
     </Grao>
   </Vinagre>
