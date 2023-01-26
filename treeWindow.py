@@ -77,6 +77,6 @@ def _getElementsWithSpaces(elementsWithoutSpaces):
 
 def _generateFilePaths(initialFolder,xmlFilePaths):
   for path in xmlFilePaths:
-    newPath = os.path.join(initialFolder,path)
+    newPath = initialFolder + path
     if not os.path.exists(newPath):
       os.makedirs(newPath)
