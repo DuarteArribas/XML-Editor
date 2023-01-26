@@ -12,6 +12,7 @@ def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
   layout = [
     [sg.Table(values = [[xmlRoot.tag.replace("__"," ")]],headings = ["Name"],max_col_width = 150,auto_size_columns = True,justification = 'center',key = "xmlTable",enable_events = True)],
     [sg.Button('Add'),sg.Button('Remove')],
+    [sg.Button("Generate File Path"),sg.Button("Show Tree")],
     [sg.Button('Next'),sg.Button('Previous'),sg.Button('Top'),sg.Button('Random'),sg.Button("Exit")]
   ]
   window   = sg.Window('XML Tree',layout,element_justification = "c")
@@ -55,12 +56,13 @@ def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
     if event == "Random":
       allElements   = getAllElements(xmlRoot)
       randomEl      = random.choice(allElements)
-      print(randomEl)
       parentElement = getParentElement(xmlRoot,randomEl,xmlRoot.tag)
       if not parentElement:
         xmlTable.update([xmlRoot.tag])
       else:
         xmlTable.update(_getElementsWithSpaces(getElements(xmlRoot,parentElement)))
+    if event == "Generate File Path":
+      folder = pickFolderOfPathWindow()
   window.close()
   
 def _getElementsWithSpaces(elementsWithoutSpaces):
