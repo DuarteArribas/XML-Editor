@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 import xml.etree
+import pydot
 from lxml import etree
 
 def isXml(xmlString):
@@ -93,3 +94,13 @@ def getXMLFilePaths(file):
   for e in root.iter():
     filePaths.append([tree.getpath(e),e.attrib])
   return filePaths
+
+def writeMindMap(root,graph):
+  mapRootNode = pydot.Node(root.tag,label = root.tag)
+  graph.add_node(mapRootNode)
+  for element in root:
+    subNode = writeMindMap(element,graph)
+    graph.add_node(subNode)
+    edge = pydot.Edge(mapRootNode,subNode)
+    graph.add_edge(edge)
+  return mapRootNode

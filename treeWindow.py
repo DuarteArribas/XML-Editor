@@ -1,13 +1,15 @@
 import PySimpleGUI as sg
 import textwrap
 import random
+import pydot
 import sys
 import os
-from pickFolderOfPathWindow import *
-from confirmationWindow     import *
-from addElementWindow       import *
-from errorWindow            import *
-from xmlParser              import *
+from pickFolderOfMindMapWindow import *
+from pickFolderOfPathWindow    import *
+from confirmationWindow        import *
+from addElementWindow          import *
+from errorWindow               import *
+from xmlParser                 import *
 
 def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
   layout = [
@@ -68,6 +70,13 @@ def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
         continue
       xmlFilePaths = getXMLFilePaths(xmlFile)
       _generateFilePaths(initialFolder,xmlFilePaths,txtForEachAttribute)
+    if event == "Show Tree":
+      initialFolder = pickFolderOfMindMapWindow()
+      if not initialFolder:
+        continue
+      graph = pydot.Dot(graph_type = 'graph')
+      writeMindMap(xmlRoot,graph)
+      graph.write_png(f"{initialFolder}/myMindMap.png")
   window.close()
 
 def _getElementsWithSpaces(elementsWithoutSpaces):
