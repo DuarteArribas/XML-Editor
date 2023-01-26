@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 import xml.etree
+from lxml import etree
 
 def isXml(xmlString):
   try:
@@ -82,3 +83,13 @@ def removeElement(tree,filename,root,name):
     el = removeElement(tree,filename,element,name)
     if el:
       return el
+
+def getXMLFilePaths(file):
+  root = None
+  with open(file,"r") as f:
+    root = etree.fromstring("".join(f.readlines()))
+  tree = etree.ElementTree(root)
+  filePaths = []
+  for e in root.iter():
+    filePaths.append(tree.getpath(e))
+  return filePaths

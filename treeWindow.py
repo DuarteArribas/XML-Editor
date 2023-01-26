@@ -3,10 +3,11 @@ import textwrap
 import random
 import sys
 import os
-from confirmationWindow import *
-from addElementWindow   import *
-from errorWindow        import *
-from xmlParser          import *
+from pickFolderOfPathWindow import *
+from confirmationWindow     import *
+from addElementWindow       import *
+from errorWindow            import *
+from xmlParser              import *
 
 def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
   layout = [
@@ -62,10 +63,20 @@ def treeWindow(xmlTree,xmlRoot,xmlParent,xmlFile):
       else:
         xmlTable.update(_getElementsWithSpaces(getElements(xmlRoot,parentElement)))
     if event == "Generate File Path":
-      folder = pickFolderOfPathWindow()
+      initialFolder = pickFolderOfPathWindow()
+      if not initialFolder:
+        continue
+      xmlFilePaths = getXMLFilePaths(xmlFile)
+      _generateFilePaths(initialFolder,xmlFilePaths)
   window.close()
-  
+
 def _getElementsWithSpaces(elementsWithoutSpaces):
   return [
     textwrap.wrap(elementWithoutSpaces.replace("__"," "),len(elementWithoutSpaces.replace("__"," "))) for elementWithoutSpaces in elementsWithoutSpaces
   ]
+
+def _generateFilePaths(initialFolder,xmlFilePaths):
+  for path in xmlFilePaths:
+    newPath = os.path.join(initialFolder,path)
+    if not os.path.exists(newPath):
+      os.makedirs(newPath)

@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import os
 from errorWindow import *
 
-def newXMLFileWindow():
+def pickFolderOfPathWindow():
   layout = [
     [[sg.Text("Choose a location to generate the file path: "),sg.Input(key = "folderLocation",font=16),sg.FolderBrowse()]],
     [[sg.Button("Go"),sg.Button("Go Back")]]
